@@ -5,8 +5,10 @@
 
 <?php
 
-$preco_etanol = 6;
-$preco_gasolina = 8;
+//var_dump($_GET); printa um array ou variavel
+// exit; para a execucao
+$preco_etanol = $_GET["preco_etanol"];
+$preco_gasolina = $_GET["preco_gasolina"];
 $porcentagem = $preco_etanol / $preco_gasolina;
 echo $porcentagem;
 
