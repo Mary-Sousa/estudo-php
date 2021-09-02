@@ -1,17 +1,21 @@
-<form action="" method="GET">
-			<fieldset>
-				<div class="conteiner">
-					<input type="text" placeholder="Preço Etanol" class="pesquisa" name="etanol"><br><br>
-               <input type="text" placeholder="Preço Gasolina" class="pesquisa" name="gasolina"><br><br>
-				</div>
-				<div class="bot">
-					<button class="enviar">Pesquisa</button>
-									</div>
-			</fieldset>
-    	</form>   
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="desafio.css">
+	<title>Google</title>
+	<meta charset="UTF-8"/>
+</head>
+<body>
+	<h1>Etanol ou Gasolina?</h1>
+	<form action="" method="GET">
+		<fieldset>
+			<input type="text" placeholder="Preço Etanol" class="pesquisa" name="etanol"><br><br>
+            <input type="text" placeholder="Preço Gasolina" class="pesquisa" name="gasolina"><br><br>
+			<button class="enviar">Cálculo</button>
+		</fieldset>
+	</form>   
 
 
-   
 
 <?php
 
@@ -20,7 +24,7 @@
 $preco_etanol = $_GET["etanol"];
 $preco_gasolina = $_GET["gasolina"];
 $porcentagem = $preco_etanol / $preco_gasolina;
-echo $porcentagem;
+// echo isset($porcentagemn);
 
 if($porcentagem < 0.7){
    $melhor_combustivel = "Etanol";
@@ -28,8 +32,12 @@ if($porcentagem < 0.7){
    $melhor_combustivel = "Gasolina";
 }
 
-echo "Abasteça com ${melhor_combustivel}";
+if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
+	echo "Abasteça com ${melhor_combustivel}";
+}
 
 ?>
 
+</body>
+</html>	
 
