@@ -36,6 +36,34 @@ if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
 	echo "Abasteça com ${melhor_combustivel}";
 }
 
+//Connect To Database
+	
+$hostname="localhost";
+$username="root";
+$password="root";
+$dbname="calculadora_php";
+
+
+$mysqli_connection = new MySQLi($hostname, $username, $password, $dbname);
+if($mysqli_connection->connect_error){
+   echo "Desconectado! Erro: " . $mysqli_connection->connect_error;
+   exit;
+}
+// else{
+//    echo "Conectado!";
+// }
+
+$data = date("Y-m-d H:i:s");
+$mysqli_query = "INSERT INTO informacoes (data, etanol, gasolina, calculo) VALUES ('$data', '{$preco_etanol}', {$preco_gasolina}, {$porcentagem})";
+if (!mysqli_query($mysqli_connection, $mysqli_query)) {
+	echo "Error: " . $mysqli_query . "<br>" . mysqli_error($mysqli_connection);
+	exit;
+}
+//else {
+// 	  echo "New record created successfully";
+//  }
+mysqli_close($conn);
+
 ?>
 
 </body>
