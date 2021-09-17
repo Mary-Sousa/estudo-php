@@ -34,7 +34,7 @@ if($porcentagem < 0.7){
 
 
 if(isset($_GET["etanol"]) && isset($_GET["gasolina"]) && $preco_gasolina != "" && $preco_etanol != ""){
-	echo "Abasteça com ${melhor_combustivel}";
+	echo "Abasteça com ${melhor_combustivel} <br>";
 }
 
 //Connect To Database
@@ -58,6 +58,16 @@ $mysqli_query = "INSERT INTO informacoes (data, etanol, gasolina, calculo) VALUE
 
 if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
 	$result = mysqli_query($mysqli_connection, $mysqli_query);
+}
+
+$mysqli_query = "SELECT * FROM informacoes"; 
+$resultado_lista = mysqli_query ($mysqli_connection, $mysqli_query);
+while ($row_lista = mysqli_fetch_assoc ($resultado_lista)) {
+	echo "ID: " . $row_lista ['id'] . "<br>";
+	echo "DATA: " . $row_lista ['data'] . "<br>";
+	echo "ETANOL: " . $row_lista ['etanol'] . "<br>";
+	echo "GASOLINA: " . $row_lista ['gasolina'] . "<br>";
+	echo "CÁLCULO: " . $row_lista ['calculo'] . "<br><hr>";
 }
 	
 // if (!$result) {
