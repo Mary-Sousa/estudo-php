@@ -32,7 +32,8 @@ if($porcentagem < 0.7){
    $melhor_combustivel = "Gasolina";
 }
 
-if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
+
+if(isset($_GET["etanol"]) && isset($_GET["gasolina"]) && $preco_gasolina != "" && $preco_etanol != ""){
 	echo "Abasteça com ${melhor_combustivel}";
 }
 
@@ -52,13 +53,17 @@ if($mysqli_connection->connect_error){
 // else{
 //    echo "Conectado!";
 // }
-
 $data = date("Y-m-d H:i:s");
 $mysqli_query = "INSERT INTO informacoes (data, etanol, gasolina, calculo) VALUES ('$data', '{$preco_etanol}', {$preco_gasolina}, {$porcentagem})";
-if (!mysqli_query($mysqli_connection, $mysqli_query)) {
-	echo "Error: " . $mysqli_query . "<br>" . mysqli_error($mysqli_connection);
-	exit;
+
+if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
+	$result = mysqli_query($mysqli_connection, $mysqli_query);
 }
+	
+// if (!$result) {
+// 	echo "Error: " . $mysqli_query . "<br>" . mysqli_error($mysqli_connection);
+// 	exit;
+// }
 //else {
 // 	  echo "New record created successfully";
 //  }
