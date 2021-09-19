@@ -63,11 +63,16 @@ if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
 $mysqli_query = "SELECT * FROM informacoes"; 
 $resultado_lista = mysqli_query ($mysqli_connection, $mysqli_query);
 while ($row_lista = mysqli_fetch_assoc ($resultado_lista)) {
+
+$data = strtotime($row_lista ['data']);
+
 	echo "ID: " . $row_lista ['id'] . "<br>";
-	echo "DATA: " . $row_lista ['data'] . "<br>";
+	// echo "DATA: " . $row_lista ['data'] . "<br>";
+	echo "DATA: " . date('d/m/Y', $data) . "<br>";
 	echo "ETANOL: " . $row_lista ['etanol'] . "<br>";
 	echo "GASOLINA: " . $row_lista ['gasolina'] . "<br>";
 	echo "CÁLCULO: " . $row_lista ['calculo'] . "<br><hr>";
+	
 }
 	
 // if (!$result) {
@@ -83,4 +88,5 @@ mysqli_close($conn);
 
 </body>
 </html>	
+
 
