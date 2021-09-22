@@ -60,7 +60,7 @@ if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
 	$result = mysqli_query($mysqli_connection, $mysqli_query);
 }
 
-$mysqli_query = "SELECT * FROM informacoes"; 
+$mysqli_query = "SELECT * FROM informacoes ORDER BY id DESC LIMIT 5"; 
 $resultado_lista = mysqli_query ($mysqli_connection, $mysqli_query);
 while ($row_lista = mysqli_fetch_assoc ($resultado_lista)) {
 
