@@ -13,11 +13,10 @@
             <input type="text" placeholder="Preço Gasolina" class="pesquisa" name="gasolina"><br><br>
 			<button class="enviar">Cálculo</button>
 		</fieldset>
-	</form>   
-
-
-
+	</form> 
+	
 <?php
+session_start();
 
 //var_dump($_GET);// printa um array ou variavel
 // exit; //para a execucao
@@ -38,6 +37,7 @@ if(isset($_GET["etanol"]) && isset($_GET["gasolina"]) && $preco_gasolina != "" &
 }
 
 //Connect To Database
+
 	
 $hostname="localhost";
 $username="root";
@@ -60,6 +60,10 @@ if(isset($_GET["etanol"]) && isset($_GET["gasolina"])){
 	$result = mysqli_query($mysqli_connection, $mysqli_query);
 }
 
+$id = filter_input (INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$mysqli_query = "DELETE FROM informacoes WHERE id='$id'";
+$resultado_delete = mysqli_query($mysqli_connection, $mysqli_query);
+
 $mysqli_query = "SELECT * FROM informacoes ORDER BY id DESC LIMIT 5"; 
 $resultado_lista = mysqli_query ($mysqli_connection, $mysqli_query);
 while ($row_lista = mysqli_fetch_assoc ($resultado_lista)) {
@@ -71,9 +75,11 @@ $data = strtotime($row_lista ['data']);
 	echo "DATA: " . date('d/m/Y', $data) . "<br>";
 	echo "ETANOL: " . $row_lista ['etanol'] . "<br>";
 	echo "GASOLINA: " . $row_lista ['gasolina'] . "<br>";
-	echo "CÁLCULO: " . $row_lista ['calculo'] . "<br><hr>";
-	
+	echo "CÁLCULO: " . $row_lista ['calculo'] . "<br>";
+	echo "<a href='index.php?id=". $row_lista ['id'] ."'>Delete</a><br><hr>";	
 }
+ 
+
 	
 // if (!$result) {
 // 	echo "Error: " . $mysqli_query . "<br>" . mysqli_error($mysqli_connection);
