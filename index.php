@@ -11,12 +11,22 @@
 		<fieldset>
 			<input type="text" placeholder="Preço Etanol" class="pesquisa" name="etanol"><br><br>
             <input type="text" placeholder="Preço Gasolina" class="pesquisa" name="gasolina"><br><br>
-			<button class="enviar">Cálculo</button>
+			<button class="enviar">Cálculo</button><br>
 		</fieldset>
 	</form> 
 	
 <?php
 session_start();
+date_default_timezone_set('America/Sao_Paulo');
+
+if (isset($_COOKIE['cookie_teste'])) {
+	echo 'Útimo acesso ', strftime( '%d/%m/%Y %H:%M:%S');
+	
+} else {
+	echo 'Bem vindo!';
+	setcookie('cookie_teste', 'Algum valor...', time() + 30);
+}
+	echo "<br><br> ";
 
 //var_dump($_GET);// printa um array ou variavel
 // exit; //para a execucao
@@ -69,14 +79,14 @@ $resultado_lista = mysqli_query ($mysqli_connection, $mysqli_query);
 while ($row_lista = mysqli_fetch_assoc ($resultado_lista)) {
 
 $data = strtotime($row_lista ['data']);
-
+	echo "<br><hr>";
 	echo "ID: " . $row_lista ['id'] . "<br>";
 	// echo "DATA: " . $row_lista ['data'] . "<br>";
 	echo "DATA: " . date('d/m/Y', $data) . "<br>";
 	echo "ETANOL: " . $row_lista ['etanol'] . "<br>";
 	echo "GASOLINA: " . $row_lista ['gasolina'] . "<br>";
 	echo "CÁLCULO: " . $row_lista ['calculo'] . "<br>";
-	echo "<a href='index.php?id=". $row_lista ['id'] ."'>Delete</a><br><hr>";	
+	echo "<a href='index.php?id=". $row_lista ['id'] ."'>Delete</a><br>";	
 }
  
 
